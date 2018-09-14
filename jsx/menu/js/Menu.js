@@ -1,11 +1,5 @@
-function listItems(item) {
-  return (
-    <li><a href={item.href}>{item.title}</a></li>
-  )
-}
-
 const Menu = ({items, opened}) => {
-  if (opened === undefined || opened === false) {
+  if (!opened) {
     return (
       <div className="menu">
         <div className="menu-toggle"><span></span></div>
@@ -17,7 +11,7 @@ const Menu = ({items, opened}) => {
         <div className="menu-toggle"><span></span></div>
         <nav>
           <ul>
-            {items.map(listItems)}
+            {items.map(item => <li><a href={item.href}>{item.title}</a></li>)}
           </ul>
         </nav>
       </div>
