@@ -7,12 +7,4 @@ const item = {
   currency: '£'
 }
 
-const ShopItem = ({item}) => {
-  return (
-    <div className="main-content">
-      <h2>{item}</h2>
-    </div>
-  )
-}
-
 ReactDOM.render(<ShopItem item={item} />, document.getElementById('root'));
