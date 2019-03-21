@@ -1,12 +1,13 @@
 'use strict';
 
-function Stars({count}) {
-
-  if (typeof count === 'number' && count >= 1 && count <= 5) {
+const Stars = function ({count}) {
+  if (count >= 1 && count <= 5) {
     return (
-    <ul className="card-body-stars u-clearfix">
-      {Array(count).fill(<li><Star /></li>)}
-    </ul>
+      <ul className="card-body-stars u-clearfix">
+        <li>
+          {Array(count).fill(<Star />)}
+        </li>
+        </ul>
     )
   }
   return null;

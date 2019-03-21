@@ -7,27 +7,24 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      layout: VIEW_MODULE
-    }
+      layoutType: VIEW_MODULE
+    };
   }
 
-  getIcon = () => this.state.layout === VIEW_MODULE ? VIEW_LIST : VIEW_MODULE;
-
-  handleSwitch = () => this.setState({
-    layout: this.state.layout === VIEW_MODULE ? VIEW_LIST : VIEW_MODULE
-  });
-
-  isCardView = () => this.state.layout === VIEW_MODULE;
-
+  onSwitch = event => { 
+    console.log(event.currentTarget.textContent);
+    const layout = event.currentTarget.textContent === VIEW_LIST ? VIEW_MODULE : VIEW_LIST;
+    this.setState({layoutType: layout});
+  }
   render() {
     return (
       <div>
         <div className="toolbar">
           <IconSwitch
-            icon={this.getIcon()}
-            onSwitch={this.handleSwitch} />
+            icon={this.state.layoutType}
+            onSwitch={this.onSwitch} />
         </div>
-        {this.renderLayout(this.isCardView())}
+        {this.renderLayout(this.state.layoutType === VIEW_LIST)}
       </div>
     );
   }

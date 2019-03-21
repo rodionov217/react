@@ -6,7 +6,7 @@ const items = [
 
 const app = (
   <div>
-    <Menu items={items} opened />
+  
     <Menu items={items} />
   </div>
 );
