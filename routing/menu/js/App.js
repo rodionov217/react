@@ -7,7 +7,7 @@ class App extends React.Component {
           <div className="page">
             <Route path="/" exact component={HomePage} />
             <Route path="/drift" component={DriftPage} />
-            <Route path="/timeattack" component={TimeAttackPage} />
+            <Route path="/timeattack"  component={TimeAttackPage} />
             <Route path="/forza" component={ForzaPage} />
           </div>
         </div>

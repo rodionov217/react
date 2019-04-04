@@ -8,7 +8,6 @@ function compareNumbers(a, b) {
 
 class App extends React.Component {
   initialData = {
-    data: [],
 			series: ['France', 'Italy', 'England', 'Sweden', 'Germany'],
 			labels: ['cats', 'dogs', 'horses', 'ducks', 'cows'],
 			colors: ['#43A19E', '#7B43A1', '#F2317A', '#FF9824', '#58CF6C']
@@ -16,10 +15,10 @@ class App extends React.Component {
 	render() {
 		return (
 			<section>
-        <Charts state={this.initialData}/>
-        <Charts type="stacked" state={this.initialData}/>
-        <Charts type="layered" state={this.initialData}/>
-        <Charts type="horizontal" state={this.initialData}/>
+        <Charts initialData={this.initialData}/>
+        <Charts type="stacked" initialData={this.initialData}/>
+        <Charts type="layered" initialData={this.initialData}/>
+        <Charts type="horizontal" initialData={this.initialData}/>
         <Legend labels={this.initialData.labels} colors={this.initialData.colors}/>
 			</section>
       
@@ -31,17 +30,17 @@ class Charts extends React.Component {
   constructor(props) {
     super(props);
     this.type = props.type === undefined ? '' : props.type;
-    this.state = props.state;
+    this.initialData = props.initialData;
+    this.state = {data: []}
   }
   
   populateArray() {
-		const	series = 5;
-		const serieLength = 5;
-
+    const	series = 5;
+    const serieLength = 5;
     let data = new Array(series).fill(new Array(serieLength).fill(0));
     data = data.map(serie => serie.map(item => getRandomInt(0, 20)));
 
-		this.setState({ data: data });
+    this.setState({ data: data });
   }
   
   componentDidMount() {
@@ -50,16 +49,18 @@ class Charts extends React.Component {
 	}
 
   render() {
-    const { data, series, labels, colors} = this.state;
+    const data = this.state.data;
+    const {colors, labels, series} = this.initialData;
+    
     const max = data.reduce((max, serie) => Math.max(max, serie.reduce((serieMax, item) => Math.max(serieMax, item), 0)), 0);
-    const classname = this.props.type === 'horizontal' ? 'horizontal' : '';
+    const classname = this.type === 'horizontal' ? 'horizontal' : '';
 
     return (
       <div className={"Charts " + classname}>
           {data.map((serie, serieIndex) => { 
             const params = {
               type: this.type,
-              style: {height: this.props.type === 'horizontal' ? 'auto' : 250},
+              style: {height: this.type === 'horizontal' ? 'auto' : 250},
               colors: colors,
               max: max,
               serie: serie,
@@ -73,7 +74,7 @@ class Charts extends React.Component {
 }
 
 const ChartSerie = (props) => {
-  let classname = props.type === "horizontal" ? "Charts--serie" : "Charts--serie " + props.type;
+  const classname = props.type === "horizontal" ? "Charts--serie" : "Charts--serie " + props.type;
   return (
     <div className={classname} key={props.key} style={props.style}>
       <label>{ props.label }</label>
@@ -95,8 +96,8 @@ const ChartItem = (props) => {
   let sortedSerie = props.serie.slice(0);
   let sum = props.serie.reduce((carry, current) => carry + current, 0);
   let size = props.type === 'stacked' ? 
-              props.item / sum * 100 : 
-              props.item / props.max * 100;
+             props.item / sum * 100 : 
+             props.item / props.max * 100;
   let style = {
     backgroundColor: props.color,
     height: size + '%',

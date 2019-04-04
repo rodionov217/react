@@ -27,3 +27,29 @@ const Profile = props => {
     </div>
   );
 };
+
+const checkPropType = (props, propName, componentName) => {
+  let isCorrect, prop = props[propName];
+  if (propName === 'birthday') {
+    let dateString = prop;
+    let date = new Date(dateString);
+    isCorrect = (typeof dateString === 'string') && /^\d{4}-\d{2}-\d{2}$/.test(dateString) && date.toISOString().slice(0, 10) === dateString && date < new Date();
+  } else if (propName === 'url') {
+    let adr = prop;
+    isCorrect = adr.substr(0, 17) === 'https://vk.com/id' && /[0-9]+|[A-Za-z0-9_-]+/.test(adr.substr(17));
+  }
+  if (!isCorrect) {
+    return new Error(`Неправильный формат параметра ${propName} в компоненте ${componentName}`)
+  }
+  return null;
+}
+
+Profile.defaultProps = {
+  img: './images/profile.jpg'
+}
+
+Profile.propTypes = {
+  birthday: checkPropType,
+  url: checkPropType
+}
+

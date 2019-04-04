@@ -13,6 +13,7 @@ class App extends React.Component {
     this.setState({
       active: option
     });
+    
   }
 
   toggleOpen = () => {
