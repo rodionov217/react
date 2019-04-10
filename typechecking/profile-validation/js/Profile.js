@@ -52,4 +52,4 @@ Profile.propTypes = {
   birthday: checkPropType,
   url: checkPropType
 }
-
+//должно быть 5 проптайпс
