@@ -7,6 +7,7 @@ class SearchBox extends React.Component {
   }
 
   componentDidMount() {
+    console.log(this.box);
     this.box = document.querySelector('.search-box');
     this.boxInitialPosition = this.box.offsetTop;
 

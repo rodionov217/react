@@ -17,10 +17,52 @@ class App extends React.Component {
     render() {
         return (
             <div id="app">
-                <MonthTable list={this.state.list} />
-                <YearTable list={this.state.list} />
-                <SortTable list={this.state.list} />
+                <SortedByMonth data={this.state.list}/>
+                <SortedByYear data={this.state.list}/>
+                <SortedByDate data={this.state.list}/>
             </div>
         );
     }
 };
+
+const SortedByMonth = withSort('month')(MonthTable);
+const SortedByYear = withSort('year')(YearTable);
+const SortedByDate = withSort('date')(SortTable);
+
+function withSort(type) {
+  return Component => class extends React.Component {
+    getSorted(data) {
+      data.forEach(el => el.date = new Date(el.date));
+      data = data.sort((a, b) => b.date - a.date);
+      return this.sortByType(data);
+    } 
+
+    sortByType(data) {
+      switch (type) {
+        case 'year':
+          return data.map(el => {
+            return {year: el.date.getFullYear(), amount: el.amount}
+          });
+        case 'date': 
+          return data.map(el => {
+            return {date: el.date.toISOString().slice(0, 10), amount: el.amount}
+          });
+        case 'month':
+        return data
+                .reverse()
+                .filter(el => el.date.getFullYear() === 2018)
+                .map(el => {
+                  return {
+                    month: el.date.toDateString().split(' ')[1],
+                    amount: el.amount
+                  }
+                });
+      }
+    } 
+    
+    render() {
+      const data = this.props.data.slice();
+      return <Component list={this.getSorted(data)} />
+    }
+  }
+}
