@@ -1,8 +1,18 @@
-class SubscribtionPage extends React.Component {
+const {withRouter, Prompt} = ReactRouterDOM;
+class SubscribtionComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    
+  }
+  componentWillUnmount() {
+    console.log(this.props);
+
+  }
+ 
   render() {
+    
     return (
       <div>
-        <Nav />
         <article className="container m-5">
           <h1>Оформление подписки</h1>
           <p>Досточно только очень сильно захотеть — и подписка офорлмена!</p>
@@ -12,7 +22,10 @@ class SubscribtionPage extends React.Component {
           <p>Этот концепт элиминирует концепт «нормального», однако генезис психологически дает сублимированный кризис. Стратификация, как бы это ни казалось парадоксальным, конфронтально отталкивает эгоцентризм. Индивидуальность, как справедливо считает Ф.Энгельс, вызывает оппортунический эгоцентризм. Предсознательное отчуждает филосовский гендер. Кризис, согласно традиционным представлениям, выбирает интеллект. Эгоцентризм, конечно, притягивает филогенез.</p>
           <p>В заключении добавлю, психосоматика отчуждает объект. Бессознательное случайно. Психосоматика притягивает эскапизм. Но так как книга Фридмана адресована руководителям и работникам образования, то есть интроекция представляет собой кризис.</p>
         </article>
+        <Prompt message="Вы уверены?"/>
       </div>
     );
   }
 }
+
+const SubscribtionPage = withRouter(SubscribtionComponent);

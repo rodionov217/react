@@ -1,9 +1,14 @@
-class App extends React.Component {
+const App = (props) => {
+    const { logs } = props;
+    return <Nav logs={logs}/>
+};
+
+class LogFetcher extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       logs: []
-    };
+    }
   }
 
   componentDidMount() {
@@ -13,29 +18,30 @@ class App extends React.Component {
   }
 
   render() {
-    const { logs } = this.state;
-
-    return (
-      <Router>
-        <div>
-          <ul className="nav">
-            <li className="nav-item">
-              <Link className="nav-link" to="/">Текущие данные</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/archive">Архив</Link>
-            </li>
-          </ul>
-          <Switch>
-            <Route exact path="/">
-              <Current logs={logs} />
-            </Route>
-            <Route path="/archive">
-              <Archive logs={logs} />
-            </Route>
-          </Switch>
-        </div>
-      </Router>
-    );
+    const {logs} = this.state;
+    return <App logs={logs}/>
   }
-};
+}
+
+const Nav = ({logs}) => {
+  return (
+    <div>
+      <ul className="nav">
+        <li className="nav-item">
+          <NavLink className="nav-link" to="/routing-xhr/logs/">Текущие данные</NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink className="nav-link" to="/routing-xhr/logs/archive">Архив</NavLink>
+        </li>
+      </ul>
+      <Switch>
+        <Route path="/routing-xhr/logs/archive">
+          <Archive logs={logs} />
+        </Route>
+        <Route exact path="/routing-xhr/logs/">
+          <Current logs={logs} />
+        </Route>
+      </Switch>
+    </div>
+  )
+}

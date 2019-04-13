@@ -25,11 +25,11 @@ class App extends React.Component {
     }
 };
 
-const SortedByMonth = withSort('month')(MonthTable);
-const SortedByYear = withSort('year')(YearTable);
-const SortedByDate = withSort('date')(SortTable);
+const SortedByMonth = withSorting('month')(MonthTable);
+const SortedByYear = withSorting('year')(YearTable);
+const SortedByDate = withSorting('date')(SortTable);
 
-function withSort(type) {
+function withSorting(type) {
   return Component => class extends React.Component {
     getSorted(data) {
       data.forEach(el => el.date = new Date(el.date));
@@ -59,7 +59,7 @@ function withSort(type) {
                 });
       }
     } 
-    
+
     render() {
       const data = this.props.data.slice();
       return <Component list={this.getSorted(data)} />

@@ -31,16 +31,12 @@
   <script type="text/babel" src="./js/App.js"></script>
 
   <script type="text/babel">
-    const ReactRouter = window.ReactRouterDOM;
-    const Router = ReactRouter.HashRouter;
-    const Route = ReactRouter.Route;
-    const NavLink = ReactRouter.NavLink;
-    const Link = ReactRouter.Link;
-    const Switch = ReactRouter.Switch;
-    const withRouter = ReactRouter.withRouter;
+    const {BrowserRouter, Link, Switch, Route, withRouter} = ReactRouterDOM;
 
     ReactDOM.render(
-      <App/>,
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>,
       document.getElementById('root')
     );
   </script>

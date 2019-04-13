@@ -1,17 +1,16 @@
 class App extends React.Component {
   render() {
     return (
-      <Router>
         <div>
           <Header />
           <Switch>
-            <Route exact path="/">
+            <Route exact path="/routing-xhr/latin/">
               <Homepage />
             </Route>
-            <Route path="/article/:id" component={Story} />
+            <Route path="/routing-xhr/latin/article/:id" render={props => <Story {...props}/>} />
           </Switch>
         </div>
-      </Router>
+
     );
   }
 };
