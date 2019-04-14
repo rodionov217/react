@@ -13,7 +13,7 @@ h1 {
   font-size: 180px;
   line-height: 1;
 }
-
+/* 
 .wrap {
   display: flex;
   align-items: center;
@@ -57,7 +57,7 @@ button {
   &:focus {
     outline: none;
   }
-}
+} */
 
 #next {
   color: #5cb85c;
