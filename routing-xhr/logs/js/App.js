@@ -1,7 +1,4 @@
-const App = (props) => {
-    const { logs } = props;
-    return <Nav logs={logs}/>
-};
+
 
 class LogFetcher extends React.Component {
   constructor(props) {
@@ -23,7 +20,7 @@ class LogFetcher extends React.Component {
   }
 }
 
-const Nav = ({logs}) => {
+const App = ({logs}) => {
   return (
     <div>
       <ul className="nav">
@@ -35,11 +32,9 @@ const Nav = ({logs}) => {
         </li>
       </ul>
       <Switch>
-        <Route path="/routing-xhr/logs/archive">
-          <Archive logs={logs} />
+        <Route path="/routing-xhr/logs/archive" render={() => <Archive logs={logs} />}>
         </Route>
-        <Route exact path="/routing-xhr/logs/">
-          <Current logs={logs} />
+        <Route exact path="/routing-xhr/logs/" render={() => <Current logs={logs} />} >
         </Route>
       </Switch>
     </div>

@@ -1,13 +1,10 @@
-class StoryComponent extends React.Component {
-  render() {
-    return (
+const StoryComponent = (props) => (
       <div className="container mt-5">
-        <h1>Рассказ №{this.props.match.params.id}</h1>
-        {this.props.content.map(text => <p key={text}>{text}</p>)}  
+        <h1>Рассказ №{props.match.params.id}</h1>
+        {props.content.map(text => <p key={text}>{text}</p>)}  
       </div>
     );
-  }
-}
+
 
 function withFetcher(Component) {
   return class extends React.Component {

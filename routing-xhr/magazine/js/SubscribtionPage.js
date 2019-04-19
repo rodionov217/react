@@ -1,16 +1,5 @@
-const {withRouter, Prompt} = ReactRouterDOM;
-class SubscribtionComponent extends React.Component {
-  constructor(props) {
-    super(props);
-    
-  }
-  componentWillUnmount() {
-    console.log(this.props);
-
-  }
- 
-  render() {
-    
+const {Prompt} = ReactRouterDOM;
+const SubscribtionPage = () => {
     return (
       <div>
         <article className="container m-5">
@@ -26,6 +15,3 @@ class SubscribtionComponent extends React.Component {
       </div>
     );
   }
-}
-
-const SubscribtionPage = withRouter(SubscribtionComponent);

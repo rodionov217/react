@@ -36,7 +36,7 @@ class Form extends React.Component {
 
               <label>
                 Имя
-                <input className="input" name="name" value={this.state.name} onChange={this.handleChange} />
+                <input autoComplete="off" className="input" name="name" value={this.state.name} onChange={this.handleChange} />
               </label>
 
               <label>
